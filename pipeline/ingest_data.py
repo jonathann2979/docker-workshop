@@ -38,6 +38,8 @@ def run():
 
     year = 2021
     month = 1
+    
+    target_table = 'yellow_taxi_data'
 
     chunksize = 100000
 
@@ -59,7 +61,7 @@ def run():
         if first:
             # Create table schema (no data)
             df_chunk.head(0).to_sql(
-                name="yellow_taxi_data",
+                name=target_table,
                 con=engine,
                 if_exists="replace"
             )
@@ -68,7 +70,7 @@ def run():
 
         # Insert chunk
         df_chunk.to_sql(
-            name="yellow_taxi_data",
+            name=target_table,
             con=engine,
             if_exists="append"
         )
